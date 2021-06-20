@@ -3,6 +3,9 @@ Uses peripheral RGB LEDs to create ambient lighting by picking a colour from the
 
 Currently very bare-bones and only supports Corsair devices via iCUE. Feel free to use, modify, or add support for more devices.
 
+## Latest Release
+https://github.com/CraigTheDev/AmbientRGB/releases/download/v1.0-alpha/AmbientRGB.zip
+
 ## In detail
 Captures the main monitor in real time using windows GDI, capture size is reduced to 400x400 regardless of native resolution and runs at 5fps by default. This seems to be a good balance between responsiveness and keeping resource usage to a minimum, but can easily be changed. A colour histogram is then generated from the captured image by splitting up the RGB colour space into a 4x4x4 grid and counting up how many colours are in the image that fall into each of these grid cells. From this the 4 cells with the highest counts are used to create 4 colours that best represent the original captured image. 1 colour is then selected by scoring each of the 4 created colours mostly based on saturation, luminance, and count. The goal of this is to select the brightest and most vivid colour that best represents the captured image, avoiding darks and greys that will be a lot less visible when displayed on RGB lighting. Once the final colour has been selected it is then passed to any supported lighting APIs to be displayed as ambient lighting.
 
