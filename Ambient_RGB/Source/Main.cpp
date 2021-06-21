@@ -79,11 +79,6 @@ static void UpdateFrameTimers()
 {
 	int64 newTimeStamp = GetHighResolutionTimeStamp( LoopTimingGranularity_Enum );
 
-	// Update frame
-	gUpdateFrame.elapsed += newTimeStamp - gUpdateFrame.previousTimeStamp;
-	gUpdateFrame.previousTimeStamp = newTimeStamp;
-
-	// Render frame
 	gUpdateFrame.elapsed += newTimeStamp - gUpdateFrame.previousTimeStamp;
 	gUpdateFrame.previousTimeStamp = newTimeStamp;
 }
@@ -445,7 +440,7 @@ int32 CALLBACK WinMain( HINSTANCE instanceHandle, HINSTANCE prevInstance, LPSTR 
 		}
 		else if ( gSleepBetweenFrames == TRUE )
 		{
-			int64 remainingTime = gUpdateFrame.targetRate -gUpdateFrame.elapsed;
+			int64 remainingTime = gUpdateFrame.targetRate - gUpdateFrame.elapsed;
 			int64 sleepTime = remainingTime / gSleepGranuality;
 
 			if ( sleepTime > 0 && ( sleepTime < remainingTime || gSleepGranuality == 1 ) )
